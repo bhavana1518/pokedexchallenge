@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import BootstrapTable from  'react-bootstrap-table-next';
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-
+import {BootstrapTable,TableHeaderColumn} from  'react-bootstrap-table';
 
 class Pokemon extends Component {
 
@@ -30,32 +27,17 @@ class Pokemon extends Component {
      
       render() {
         const pokes = this.state.pokemons;
-        const columns = [
-          
-          {
-          dataField: 'name',
-          text: 'Name',
-          filter:textFilter()
-        }, {
-          dataField: 'num',
-          text: 'Number'
-        }, 
-        {
-          dataField: 'type',
-          text: 'Type',
-          filter:textFilter()
-        },
-      {
-        dataField:'weaknesses',
-        text:'Weaknesses',
-        filter: textFilter()
-      }];
+        
 
         return (
           <div>
-      
-      <BootstrapTable keyField='id' data={ pokes } columns={ columns } filter={ filterFactory() } />
-
+      <BootstrapTable data={pokes}>
+      <TableHeaderColumn isKey dataField='id'>ID</TableHeaderColumn>
+      <TableHeaderColumn dataField='name' filter={ { type: 'TextFilter'} }> Name</TableHeaderColumn>
+      <TableHeaderColumn dataField='num'>Num</TableHeaderColumn>
+      <TableHeaderColumn dataField='type'filter={ { type: 'TextFilter'} } > Type</TableHeaderColumn>
+      <TableHeaderColumn dataField='weaknesses' filter={{type:'TextFilter'}}>Weaknesses</TableHeaderColumn>
+      </BootstrapTable>
             </div>
         );
       }
